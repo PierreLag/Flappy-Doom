@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542a35ae238011244bfd4a24e4df3e78, type: 3}
+  m_Name: LocalLeaderboard
+  m_EditorClassIdentifier: 
+  scores:
+  - {fileID: 11400000, guid: a3779a0ec2cf7b444b88f18ba23efbf8, type: 2}
+  - {fileID: 11400000, guid: 529c20cd1137b9a4eb11ff14dafda6cd, type: 2}
+  - {fileID: 11400000, guid: e450cee6ccc796748ae1e8e8b10c33dd, type: 2}
+  - {fileID: 11400000, guid: 40bc198cad0d68e49832563065984698, type: 2}
+  - {fileID: 11400000, guid: 4a2104539fca6ee43a8e7e5b098e3a17, type: 2}
+  - {fileID: 11400000, guid: 31b7b90ea61d13a4dbea8459ad21322a, type: 2}
+  - {fileID: 11400000, guid: 3dc6791fe2673ff4a8b035e8b5138767, type: 2}
+  - {fileID: 11400000, guid: 5e07843d42a4d5b4f91dc56557cb7554, type: 2}
+  - {fileID: 11400000, guid: 3ebe8c99eadb34049936d0b8a730ef6d, type: 2}
+  - {fileID: 11400000, guid: 904c924e9c672ff499ef11136ce9e40d, type: 2}
