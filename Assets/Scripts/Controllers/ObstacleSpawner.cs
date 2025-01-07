@@ -43,6 +43,6 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        Instantiate(obstaclePrefab, new Vector3(transform.position.x, Random.Range(lowestRandomPosition, highestRandomPosition)), obstaclePrefab.transform.rotation, transform);
+        Instantiate(obstaclePrefab, new Vector3(transform.position.x, Random.Range(lowestRandomPosition, highestRandomPosition), transform.position.z), obstaclePrefab.transform.rotation, transform);
     }
 }
