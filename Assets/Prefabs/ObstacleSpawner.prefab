@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 4298724792270262572, guid: 0cceddc88393835428b5b56eb0636561, type: 3}
-  lowestRandomPosition: -5
-  highestRandomPosition: 5
+  lowestRandomPosition: -1
+  highestRandomPosition: 1
   spawnInterval: 3
   destination: {fileID: 4934729884873045707}
 --- !u!1001 &8438307232534653610
