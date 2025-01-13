@@ -93,15 +93,12 @@ public class LeaderboardManager : MonoBehaviour
 
         scores.Add(new Score(score));
 
-        scores.Sort();
+        scores.Sort((a, b) => b.CompareTo(a));  //Sorts in descending order
         scores.RemoveAt(scores.Count - 1);
-        Debug.Log("New score added : " + score);
 
         for (int i = 0; i < scores.Count; i++)
         {
             localLeaderboard.scores[i].UpdateFromScore(scores[i]);
-            Debug.Log("Score number " + i + " : " + scores[i]);
-            Debug.Log("Stored number " + i + " : " + localLeaderboard.scores[i]);
         }
         StoreLeaderboard();
     }

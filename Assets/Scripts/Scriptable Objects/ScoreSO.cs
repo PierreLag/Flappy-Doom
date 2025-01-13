@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ScoreSO", menuName = "Scriptable Objects/ScoreSO")]
+[Serializable]
 public class ScoreSO : ScriptableObject
 {
     public int score;
