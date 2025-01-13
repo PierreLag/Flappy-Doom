@@ -30,8 +30,14 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameManager.s_this.OnStart.AddListener(delegate { StartSpawning(); });
+        GameManager.s_this.OnEnd.AddListener(delegate { CancelInvoke("SpawnObstacle"); });
+    }
+
     // Start is called before the first frame update
-    void Start()
+    private void StartSpawning()
     {
         InvokeRepeating("SpawnObstacle", 1f, spawnInterval);
     }

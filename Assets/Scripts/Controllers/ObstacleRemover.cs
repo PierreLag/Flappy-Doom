@@ -5,9 +5,8 @@ using UnityEngine;
 public class ObstacleRemover : MonoBehaviour
 {
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision detected");
         Destroy(other.gameObject);
     }
 }

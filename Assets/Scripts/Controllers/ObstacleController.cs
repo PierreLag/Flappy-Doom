@@ -23,16 +23,19 @@ public class ObstacleController : MonoBehaviour
     void Start()
     {
         if (!isStatic)
+        {
             transform.DOMoveX(ObstacleSpawner.GetDestination().position.x, movementDuration).SetEase(Ease.Linear);
+            GameManager.s_this.OnEnd.AddListener(delegate { DOTween.Kill(transform); });
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.TryGetComponent<PlayerController>(out PlayerController controller))
             OnTriggerEnterCustom.Invoke();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.TryGetComponent<PlayerController>(out PlayerController controller))
             OnCollisionCustom.Invoke();

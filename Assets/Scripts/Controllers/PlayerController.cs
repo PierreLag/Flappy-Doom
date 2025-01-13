@@ -7,23 +7,38 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0f, 20f)]
     private float flyForce;
 
-    private Rigidbody2D rb;
+    private Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        GameManager.s_this.OnStart.AddListener(delegate { ToggleGravity(true); });
+        GameManager.s_this.OnEnd.AddListener(delegate { ToggleGravity(false); });
+    }
+
+    private void ToggleGravity(bool flag)
+    {
+        if (flag)
+        {
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 
     public void FlyUp()
     {
-        rb.linearVelocity = Vector2.zero;
-        rb.AddForce(new Vector2(0, flyForce), ForceMode2D.Impulse);
+        if (GameManager.s_this.IsPlaying)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.AddForce(new Vector2(0, flyForce), ForceMode.Impulse);
+        }
     }
 }

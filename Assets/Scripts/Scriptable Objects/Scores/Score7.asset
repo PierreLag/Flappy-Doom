@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Score7
   m_EditorClassIdentifier: 
   score: 0
+  day: 1
+  month: 1
+  year: 1900

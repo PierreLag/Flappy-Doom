@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Score
+public class Score : IComparable<Score>
 {
     public int score;
     public DateTime date;
@@ -28,5 +28,17 @@ public class Score
     public static bool operator >(Score score1, Score score2)
     {
         return score1.score > score2.score || (score1.score == score2.score && score1.date > score2.date);
+    }
+
+    public override string ToString()
+    {
+        return "Score : " + score + "\t\t" + date.Day + "/" + date.Month + "/" + date.Year;
+    }
+
+    public int CompareTo(Score other)
+    {
+        if (this < other) return -1;
+        else if (this > other) return 1;
+        else return 0;
     }
 }
