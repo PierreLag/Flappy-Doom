@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Linq;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "LocalLeaderboardSO", menuName = "Scriptable Objects/LocalLeaderboardSO")]
 public class LocalLeaderboardSO : ScriptableObject
@@ -8,11 +9,14 @@ public class LocalLeaderboardSO : ScriptableObject
 
     public string ToJSON()
     {
-        return JsonUtility.ToJson(scores);
+        return JArray.FromObject(scores).ToString();
     }
 
     public ScoreSO[] FromJSON(string json)
     {
-        return JsonUtility.FromJson<ScoreSO[]>(json);
+        JArray jscores = JArray.Parse(json);
+        ScoreSO[] scores = jscores.ToObject<ScoreSO[]>();
+
+        return scores;
     }
 }
