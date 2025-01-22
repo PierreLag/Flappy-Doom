@@ -708,9 +708,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 614820131}
     m_Modifications:
     - target: {fileID: 664431435299822373, guid: 0eff6b1b2beec664dae84a87433aa773, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 664431435299822373, guid: 0eff6b1b2beec664dae84a87433aa773, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 2137193654}
+      objectReference: {fileID: 0}
+    - target: {fileID: 664431435299822373, guid: 0eff6b1b2beec664dae84a87433aa773, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1561573705171031893, guid: 0eff6b1b2beec664dae84a87433aa773, type: 3}
       propertyPath: m_Pivot.x
       value: 0

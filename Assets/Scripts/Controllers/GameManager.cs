@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -62,5 +63,14 @@ public class GameManager : MonoBehaviour
         s_this.points = 0;
         s_this.isPlaying = true;
         s_this.onStart?.Invoke();
+    }
+
+    public static void QuitGame()
+    {
+        #if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+        #else
+        Application.Quit();
+        #endif
     }
 }
