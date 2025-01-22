@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleRemover : MonoBehaviour
+namespace FlappyDoom
 {
-
-    private void OnTriggerEnter(Collider other)
+    public class ObstacleRemover : MonoBehaviour
     {
-        Destroy(other.gameObject);
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

@@ -2,57 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace FlappyDoom
 {
-    [SerializeField][Range(0f, 20f)]
-    private float flyForce;
-
-    [SerializeField]
-    private Texture2D aliveTex;
-    [SerializeField]
-    private Texture2D deadTex;
-
-    private Rigidbody rb;
-    private Vector3 initialPosition;
-    private MeshRenderer meshRenderer;
-
-    // Start is called before the first frame update
-    void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-        initialPosition = transform.position;
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
-    }
+        [SerializeField]
+        [Range(0f, 20f)]
+        private float flyForce;
 
-    private void Start()
-    {
-        GameManager.s_this.OnStart.AddListener(delegate { transform.position = initialPosition; ToggleGravity(true); meshRenderer.material.mainTexture = aliveTex; });
-        GameManager.s_this.OnEnd.AddListener(delegate { ToggleGravity(false); PlayDeathSound(); meshRenderer.material.mainTexture = deadTex; });
-    }
+        [SerializeField]
+        private Texture2D aliveTex;
+        [SerializeField]
+        private Texture2D deadTex;
 
-    private void ToggleGravity(bool flag)
-    {
-        if (flag)
+        private Rigidbody rb;
+        private Vector3 initialPosition;
+        private MeshRenderer meshRenderer;
+
+        // Start is called before the first frame update
+        void Awake()
         {
-            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            rb = GetComponent<Rigidbody>();
+            initialPosition = transform.position;
+            meshRenderer = GetComponentInChildren<MeshRenderer>();
         }
-        else
-        {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-        }
-    }
 
-    public void FlyUp()
-    {
-        if (GameManager.s_this.IsPlaying)
+        private void Start()
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.AddForce(new Vector2(0, flyForce), ForceMode.Impulse);
+            GameManager.s_this.OnStart.AddListener(delegate { transform.position = initialPosition; ToggleGravity(true); meshRenderer.material.mainTexture = aliveTex; });
+            GameManager.s_this.OnEnd.AddListener(delegate { ToggleGravity(false); PlayDeathSound(); meshRenderer.material.mainTexture = deadTex; });
         }
-    }
 
-    private void PlayDeathSound()
-    {
-        GetComponent<AudioSource>().Play();
+        private void ToggleGravity(bool flag)
+        {
+            if (flag)
+            {
+                rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            }
+            else
+            {
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+            }
+        }
+
+        public void FlyUp()
+        {
+            if (GameManager.s_this.IsPlaying)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.AddForce(new Vector2(0, flyForce), ForceMode.Impulse);
+            }
+        }
+
+        private void PlayDeathSound()
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 }

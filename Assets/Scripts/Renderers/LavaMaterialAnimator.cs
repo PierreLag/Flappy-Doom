@@ -1,31 +1,34 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class LavaMaterialAnimator : MonoBehaviour
+namespace FlappyDoom
 {
-    [SerializeField]
-    private Material lavaMaterial;
-
-    [SerializeField]
-    private Texture2D[] textureVariants;
-
-    [SerializeField]
-    private int transitionTimeMs;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class LavaMaterialAnimator : MonoBehaviour
     {
-        AnimateMaterial();
-    }
+        [SerializeField]
+        private Material lavaMaterial;
 
-    private async void AnimateMaterial()
-    {
-        while (true)
+        [SerializeField]
+        private Texture2D[] textureVariants;
+
+        [SerializeField]
+        private int transitionTimeMs;
+
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
         {
-            foreach (Texture2D texture in textureVariants)
+            AnimateMaterial();
+        }
+
+        private async void AnimateMaterial()
+        {
+            while (true)
             {
-                lavaMaterial.mainTexture = texture;
-                await Task.Delay(transitionTimeMs);
+                foreach (Texture2D texture in textureVariants)
+                {
+                    lavaMaterial.mainTexture = texture;
+                    await Task.Delay(transitionTimeMs);
+                }
             }
         }
     }

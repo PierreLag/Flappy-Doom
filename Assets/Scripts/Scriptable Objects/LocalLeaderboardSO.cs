@@ -2,21 +2,24 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "LocalLeaderboardSO", menuName = "Scriptable Objects/LocalLeaderboardSO")]
-public class LocalLeaderboardSO : ScriptableObject
+namespace FlappyDoom
 {
-    public ScoreSO[] scores;
-
-    public string ToJSON()
+    [CreateAssetMenu(fileName = "LocalLeaderboardSO", menuName = "Scriptable Objects/LocalLeaderboardSO")]
+    public class LocalLeaderboardSO : ScriptableObject
     {
-        return JArray.FromObject(scores).ToString();
-    }
+        public ScoreSO[] scores;
 
-    public ScoreSO[] FromJSON(string json)
-    {
-        JArray jscores = JArray.Parse(json);
-        ScoreSO[] scores = jscores.ToObject<ScoreSO[]>();
+        public string ToJSON()
+        {
+            return JArray.FromObject(scores).ToString();
+        }
 
-        return scores;
+        public ScoreSO[] FromJSON(string json)
+        {
+            JArray jscores = JArray.Parse(json);
+            ScoreSO[] scores = jscores.ToObject<ScoreSO[]>();
+
+            return scores;
+        }
     }
 }

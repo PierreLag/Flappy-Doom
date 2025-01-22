@@ -6,160 +6,163 @@ using UnityEngine.Networking;
 using System.Threading.Tasks;
 using System;
 
-public class OnlineController : MonoBehaviour
+namespace FlappyDoom
 {
-    [SerializeField]
-    private string apiUrlBase;
-    [SerializeField]
-    private string apiUploadUsername;
-    [SerializeField]
-    private string apiUploadScore;
-    [SerializeField]
-    private string apiDownloadScores;
-
-    private string username;
-
-    private object latestResponse;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class OnlineController : MonoBehaviour
     {
-        username = PlayerPrefs.GetString("username", "");
-        GameManager.s_this.OnEnd.AddListener(delegate { StartCoroutine(UploadScore()); });
-    }
+        [SerializeField]
+        private string apiUrlBase;
+        [SerializeField]
+        private string apiUploadUsername;
+        [SerializeField]
+        private string apiUploadScore;
+        [SerializeField]
+        private string apiDownloadScores;
 
-    public async void SaveUsername(string username)
-    {
-        StartCoroutine(UploadUsername(username));
+        private string username;
 
-        object response = null;
-        int timesWaiting = 0;
-        while (response == null && timesWaiting <= 5)
+        private object latestResponse;
+
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
         {
-            await Task.Delay(100);
-            response = latestResponse;
-            timesWaiting++;
+            username = PlayerPrefs.GetString("username", "");
+            GameManager.s_this.OnEnd.AddListener(delegate { StartCoroutine(UploadScore()); });
         }
 
-        switch (response)
+        public async void SaveUsername(string username)
         {
-            case "Operation successful.":
-                this.username = username;
-                PlayerPrefs.SetString("username", username);
-                break;
-            default:
-                break;
+            StartCoroutine(UploadUsername(username));
+
+            object response = null;
+            int timesWaiting = 0;
+            while (response == null && timesWaiting <= 5)
+            {
+                await Task.Delay(100);
+                response = latestResponse;
+                timesWaiting++;
+            }
+
+            switch (response)
+            {
+                case "Operation successful.":
+                    this.username = username;
+                    PlayerPrefs.SetString("username", username);
+                    break;
+                default:
+                    break;
+            }
+
+            await Task.Delay(50);
+            ResetResponse();
         }
 
-        await Task.Delay(50);
-        ResetResponse();
-    }
-
-    public void LoadUsername()
-    {
-        username = PlayerPrefs.GetString("username");
-    }
-
-    public string GetUsername()
-    {
-        return username;
-    }
-
-    private IEnumerator UploadUsername(string username)
-    {
-        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-
-        formData.Add(new MultipartFormDataSection("username", username));
-
-        UnityWebRequest apiRequest = UnityWebRequest.Post(apiUrlBase + apiUploadUsername, formData);
-        apiRequest.SendWebRequest();
-
-        while (!apiRequest.isDone)
+        public void LoadUsername()
         {
-            yield return null;
+            username = PlayerPrefs.GetString("username");
         }
 
-        string response = "";
-        switch (apiRequest.result)
+        public string GetUsername()
         {
-            case UnityWebRequest.Result.ConnectionError:
-                response = "Error : Couldn't connect";
-                break;
-            case UnityWebRequest.Result.Success:
-                response = apiRequest.downloadHandler.text;
-                break;
-            default:
-                break;
+            return username;
         }
 
-        latestResponse = response;
-    }
-
-    public IEnumerator UploadScore()
-    {
-        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-
-        formData.Add(new MultipartFormDataSection("username", username));
-        formData.Add(new MultipartFormDataSection("score", GameManager.GetPoints().ToString()));
-        formData.Add(new MultipartFormDataSection("date", DateTime.Now.Year + "-" + DateTime.Now.Month + "-" + DateTime.Now.Day));
-
-        UnityWebRequest apiRequest = UnityWebRequest.Post(apiUrlBase + apiUploadScore, formData);
-        apiRequest.SendWebRequest();
-
-        while (!apiRequest.isDone)
+        private IEnumerator UploadUsername(string username)
         {
-            yield return null;
+            List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+
+            formData.Add(new MultipartFormDataSection("username", username));
+
+            UnityWebRequest apiRequest = UnityWebRequest.Post(apiUrlBase + apiUploadUsername, formData);
+            apiRequest.SendWebRequest();
+
+            while (!apiRequest.isDone)
+            {
+                yield return null;
+            }
+
+            string response = "";
+            switch (apiRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                    response = "Error : Couldn't connect";
+                    break;
+                case UnityWebRequest.Result.Success:
+                    response = apiRequest.downloadHandler.text;
+                    break;
+                default:
+                    break;
+            }
+
+            latestResponse = response;
         }
 
-        string response = "";
-        switch (apiRequest.result)
+        public IEnumerator UploadScore()
         {
-            case UnityWebRequest.Result.ConnectionError:
-                response = "Error : Couldn't connect";
-                break;
-            case UnityWebRequest.Result.Success:
-                response = apiRequest.downloadHandler.text;
-                break;
-            default:
-                break;
-        }
-    }
+            List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
 
-    public IEnumerator GetScores()
-    {
-        UnityWebRequest apiRequest = UnityWebRequest.Get(apiUrlBase + apiDownloadScores);
-        apiRequest.SendWebRequest();
+            formData.Add(new MultipartFormDataSection("username", username));
+            formData.Add(new MultipartFormDataSection("score", GameManager.GetPoints().ToString()));
+            formData.Add(new MultipartFormDataSection("date", DateTime.Now.Year + "-" + DateTime.Now.Month + "-" + DateTime.Now.Day));
 
-        while (!apiRequest.isDone)
-        {
-            yield return null;
-        }
+            UnityWebRequest apiRequest = UnityWebRequest.Post(apiUrlBase + apiUploadScore, formData);
+            apiRequest.SendWebRequest();
 
-        string response = "";
-        List<Score> scores = new List<Score>();
-        switch (apiRequest.result)
-        {
-            case UnityWebRequest.Result.ConnectionError:
-                response = "Error : Couldn't connect";
-                break;
-            case UnityWebRequest.Result.Success:
-                response = apiRequest.downloadHandler.text;
-                scores = Score.FromJSON(response);
-                break;
-            default:
-                break;
+            while (!apiRequest.isDone)
+            {
+                yield return null;
+            }
+
+            string response = "";
+            switch (apiRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                    response = "Error : Couldn't connect";
+                    break;
+                case UnityWebRequest.Result.Success:
+                    response = apiRequest.downloadHandler.text;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        latestResponse = scores;
-    }
+        public IEnumerator GetScores()
+        {
+            UnityWebRequest apiRequest = UnityWebRequest.Get(apiUrlBase + apiDownloadScores);
+            apiRequest.SendWebRequest();
 
-    public object GetResponse()
-    {
-        return latestResponse;
-    }
+            while (!apiRequest.isDone)
+            {
+                yield return null;
+            }
 
-    public void ResetResponse()
-    {
-        latestResponse = null;
+            string response = "";
+            List<Score> scores = new List<Score>();
+            switch (apiRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                    response = "Error : Couldn't connect";
+                    break;
+                case UnityWebRequest.Result.Success:
+                    response = apiRequest.downloadHandler.text;
+                    scores = Score.FromJSON(response);
+                    break;
+                default:
+                    break;
+            }
+
+            latestResponse = scores;
+        }
+
+        public object GetResponse()
+        {
+            return latestResponse;
+        }
+
+        public void ResetResponse()
+        {
+            latestResponse = null;
+        }
     }
 }
