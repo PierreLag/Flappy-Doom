@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97d7c2469c3d0846ae46b5c62f5444d, type: 3}
   m_Name: Score1
   m_EditorClassIdentifier: 
-  score: 0
-  day: 1
+  score: 3
+  day: 15
   month: 1
-  year: 1900
+  year: 2025

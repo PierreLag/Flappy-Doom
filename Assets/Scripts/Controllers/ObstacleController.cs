@@ -26,6 +26,7 @@ public class ObstacleController : MonoBehaviour
         {
             transform.DOMoveX(ObstacleSpawner.GetDestination().position.x, movementDuration).SetEase(Ease.Linear);
             GameManager.s_this.OnEnd.AddListener(delegate { DOTween.Kill(transform); });
+            GameManager.s_this.OnStart.AddListener(delegate { Destroy(gameObject); });
         }
     }
 

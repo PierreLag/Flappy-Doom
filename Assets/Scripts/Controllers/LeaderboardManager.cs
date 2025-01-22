@@ -91,7 +91,7 @@ public class LeaderboardManager : MonoBehaviour
             scores.Add(Score.FromSOToScore(scoreSo));
         }
 
-        scores.Add(new Score(score));
+        scores.Add(new Score(score, "You"));
 
         scores.Sort((a, b) => b.CompareTo(a));  //Sorts in descending order
         scores.RemoveAt(scores.Count - 1);

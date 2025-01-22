@@ -1,30 +1,30 @@
 [
   {
-    "score": 15,
-    "day": 17,
+    "score": 6,
+    "day": 15,
     "month": 1,
     "year": 2025,
     "name": "Score1",
     "hideFlags": 0
   },
   {
-    "score": 11,
-    "day": 21,
+    "score": 5,
+    "day": 15,
     "month": 1,
     "year": 2025,
     "name": "Score2",
     "hideFlags": 0
   },
   {
-    "score": 7,
-    "day": 21,
+    "score": 4,
+    "day": 15,
     "month": 1,
     "year": 2025,
     "name": "Score3",
     "hideFlags": 0
   },
   {
-    "score": 7,
+    "score": 4,
     "day": 15,
     "month": 1,
     "year": 2025,
@@ -32,7 +32,7 @@
     "hideFlags": 0
   },
   {
-    "score": 6,
+    "score": 4,
     "day": 15,
     "month": 1,
     "year": 2025,
@@ -41,14 +41,14 @@
   },
   {
     "score": 4,
-    "day": 17,
+    "day": 15,
     "month": 1,
     "year": 2025,
     "name": "Score6",
     "hideFlags": 0
   },
   {
-    "score": 3,
+    "score": 4,
     "day": 15,
     "month": 1,
     "year": 2025,
@@ -56,26 +56,26 @@
     "hideFlags": 0
   },
   {
-    "score": 2,
-    "day": 22,
+    "score": 3,
+    "day": 15,
     "month": 1,
     "year": 2025,
     "name": "Score8",
     "hideFlags": 0
   },
   {
-    "score": 2,
-    "day": 22,
+    "score": 1,
+    "day": 15,
     "month": 1,
     "year": 2025,
     "name": "Score9",
     "hideFlags": 0
   },
   {
-    "score": 2,
-    "day": 21,
+    "score": 0,
+    "day": 1,
     "month": 1,
-    "year": 2025,
+    "year": 1900,
     "name": "Score10",
     "hideFlags": 0
   }

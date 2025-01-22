@@ -1,23 +1,44 @@
 using System;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class Score : IComparable<Score>
 {
+    public string name;
     public int score;
     public DateTime date;
 
-    public Score(int score)
+    public Score(int score, string name)
     {
         this.score = score;
         this.date = DateTime.Now;
+        this.name = name;
+    }
+
+    [JsonConstructor]
+    public Score(int score, string name, DateTime date)
+    {
+        this.score = score;
+        this.date = date;
+        this.name = name;
     }
 
     public static Score FromSOToScore(ScoreSO so)
     {
-        Score newScore = new Score(so.score);
-        newScore.date = new DateTime(so.year, so.month, so.day);
+        Score newScore = new Score(so.score, "You", new DateTime(so.year, so.month, so.day));
 
         return newScore;
+    }
+
+    public static List<Score> FromJSON(string json)
+    {
+        JArray jscores = JArray.Parse(json);
+        List<Score> scores = jscores.ToObject<List<Score>>();
+
+        return scores;
     }
 
     public static bool operator <(Score score1,  Score score2)
