@@ -5,40 +5,43 @@ using System;
 using UnityEngine.Events;
 using DG.Tweening;
 
-public class ObstacleController : MonoBehaviour
+namespace FlappyDoom
 {
-    [Serializable]
-    private class TriggeredEvent : UnityEvent { }
-
-    [SerializeField]
-    private TriggeredEvent OnCollisionCustom;
-    [SerializeField]
-    private TriggeredEvent OnTriggerEnterCustom;
-    [SerializeField]
-    private bool isStatic;
-    [SerializeField]
-    private float movementDuration;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ObstacleController : MonoBehaviour
     {
-        if (!isStatic)
+        [Serializable]
+        private class TriggeredEvent : UnityEvent { }
+
+        [SerializeField]
+        private TriggeredEvent OnCollisionCustom;
+        [SerializeField]
+        private TriggeredEvent OnTriggerEnterCustom;
+        [SerializeField]
+        private bool isStatic;
+        [SerializeField]
+        private float movementDuration;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            transform.DOMoveX(ObstacleSpawner.GetDestination().position.x, movementDuration).SetEase(Ease.Linear);
-            GameManager.s_this.OnEnd.AddListener(delegate { DOTween.Kill(transform); });
-            GameManager.s_this.OnStart.AddListener(delegate { Destroy(gameObject); });
+            if (!isStatic)
+            {
+                transform.DOMoveX(ObstacleSpawner.GetDestination().position.x, movementDuration).SetEase(Ease.Linear);
+                GameManager.s_this.OnEnd.AddListener(delegate { DOTween.Kill(transform); });
+                GameManager.s_this.OnStart.AddListener(delegate { Destroy(gameObject); });
+            }
         }
-    }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.TryGetComponent<PlayerController>(out PlayerController controller))
-            OnTriggerEnterCustom.Invoke();
-    }
+        private void OnTriggerEnter(Collider collision)
+        {
+            if (collision.TryGetComponent<PlayerController>(out PlayerController controller))
+                OnTriggerEnterCustom.Invoke();
+        }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.TryGetComponent<PlayerController>(out PlayerController controller))
-            OnCollisionCustom.Invoke();
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.TryGetComponent<PlayerController>(out PlayerController controller))
+                OnCollisionCustom.Invoke();
+        }
     }
 }

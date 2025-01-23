@@ -5,61 +5,64 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-public class Score : IComparable<Score>
+namespace FlappyDoom
 {
-    public string name;
-    public int score;
-    public DateTime date;
-
-    public Score(int score, string name)
+    public class Score : IComparable<Score>
     {
-        this.score = score;
-        this.date = DateTime.Now;
-        this.name = name;
-    }
+        public string name;
+        public int score;
+        public DateTime date;
 
-    [JsonConstructor]
-    public Score(int score, string name, DateTime date)
-    {
-        this.score = score;
-        this.date = date;
-        this.name = name;
-    }
+        public Score(int score, string name)
+        {
+            this.score = score;
+            this.date = DateTime.Now;
+            this.name = name;
+        }
 
-    public static Score FromSOToScore(ScoreSO so)
-    {
-        Score newScore = new Score(so.score, "You", new DateTime(so.year, so.month, so.day));
+        [JsonConstructor]
+        public Score(int score, string name, DateTime date)
+        {
+            this.score = score;
+            this.date = date;
+            this.name = name;
+        }
 
-        return newScore;
-    }
+        public static Score FromSOToScore(ScoreSO so)
+        {
+            Score newScore = new Score(so.score, "You", new DateTime(so.year, so.month, so.day));
 
-    public static List<Score> FromJSON(string json)
-    {
-        JArray jscores = JArray.Parse(json);
-        List<Score> scores = jscores.ToObject<List<Score>>();
+            return newScore;
+        }
 
-        return scores;
-    }
+        public static List<Score> FromJSON(string json)
+        {
+            JArray jscores = JArray.Parse(json);
+            List<Score> scores = jscores.ToObject<List<Score>>();
 
-    public static bool operator <(Score score1,  Score score2)
-    {
-        return score1.score < score2.score || (score1.score == score2.score && score1.date < score2.date);
-    }
+            return scores;
+        }
 
-    public static bool operator >(Score score1, Score score2)
-    {
-        return score1.score > score2.score || (score1.score == score2.score && score1.date > score2.date);
-    }
+        public static bool operator <(Score score1, Score score2)
+        {
+            return score1.score < score2.score || (score1.score == score2.score && score1.date < score2.date);
+        }
 
-    public override string ToString()
-    {
-        return "Score : " + score + "\t\t" + date.Day + "/" + date.Month + "/" + date.Year;
-    }
+        public static bool operator >(Score score1, Score score2)
+        {
+            return score1.score > score2.score || (score1.score == score2.score && score1.date > score2.date);
+        }
 
-    public int CompareTo(Score other)
-    {
-        if (this < other) return -1;
-        else if (this > other) return 1;
-        else return 0;
+        public override string ToString()
+        {
+            return "Score : " + score + "\t\t" + date.Day + "/" + date.Month + "/" + date.Year;
+        }
+
+        public int CompareTo(Score other)
+        {
+            if (this < other) return -1;
+            else if (this > other) return 1;
+            else return 0;
+        }
     }
 }
