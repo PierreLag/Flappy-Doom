@@ -51,6 +51,7 @@ public class PlayUnitTests
     [UnityTest]
     public IEnumerator isLeaderboardDisplaying()
     {
+        PlayerPrefs.SetString("username", "test");
         SceneManager.LoadScene(0);
         yield return null;
 
