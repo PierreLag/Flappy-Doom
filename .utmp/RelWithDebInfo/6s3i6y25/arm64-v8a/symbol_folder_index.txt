@@ -1,0 +1,1 @@
+C:\Users\Pierre\Desktop\Projets Unity\Flappy Doom\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\6s3i6y25\obj\arm64-v8a

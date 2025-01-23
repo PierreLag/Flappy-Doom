@@ -45,6 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localLeaderboard: {fileID: 11400000, guid: 54bb8048fc38df4458d465d7c9aa3498, type: 2}
-  filePathName: ./Leaderboard.json
-  maxScoreStorage: 10
-  timeScoreMultiplier: 5
+  filePathName: Leaderboard.json

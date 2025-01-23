@@ -1,7 +1,4 @@
-using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using System;
 using System.IO;
@@ -14,21 +11,21 @@ namespace FlappyDoom
         private LocalLeaderboardSO localLeaderboard;
 
         [SerializeField]
-        private string filePathName = "./Leaderboard.json";
+        private string filePathName = "Leaderboard.json";
 
         [STAThread]
         private void Awake()
         {
             try
             {
-                StreamReader sr = new StreamReader(filePathName);
+                StreamReader sr = new StreamReader(Application.persistentDataPath + Path.DirectorySeparatorChar + filePathName);
                 sr.Close();
             }
             catch (Exception e)
             {
                 if (e.GetType() == typeof(FileNotFoundException))
                 {
-                    StreamWriter sw = new StreamWriter(filePathName);
+                    StreamWriter sw = new StreamWriter(Application.persistentDataPath + Path.DirectorySeparatorChar + filePathName);
 
                     sw.Write(localLeaderboard.ToJSON());
 
@@ -47,7 +44,7 @@ namespace FlappyDoom
         {
             try
             {
-                StreamWriter sw = new StreamWriter(filePathName, false);
+                StreamWriter sw = new StreamWriter(Application.persistentDataPath + Path.DirectorySeparatorChar + filePathName, false);
                 sw.Write(localLeaderboard.ToJSON());
 
                 sw.Close();
@@ -64,7 +61,7 @@ namespace FlappyDoom
             Score[] score = new Score[localLeaderboard.scores.Length];
             try
             {
-                StreamReader sr = new StreamReader(filePathName);
+                StreamReader sr = new StreamReader(Application.persistentDataPath + Path.DirectorySeparatorChar + filePathName);
                 string jsonScore = sr.ReadToEnd();
 
                 sr.Close();
