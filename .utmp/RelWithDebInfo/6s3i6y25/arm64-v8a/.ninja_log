@@ -1,23 +1,12 @@
 # ninja log v5
-7	1857	7592360057374176	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	b1a2d12295e6c96e
-61	600	7592360044365255	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	c517fa5a0475667
-602	859	7592360047369747	C:/Users/Pierre/Desktop/Projets Unity/Flappy Doom/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6s3i6y25/obj/arm64-v8a/libswappywrapper.so	85ac5b45b7029dd9
-17	1400	7592360052740518	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	69f27e39a645c39c
-45	1514	7592360053920443	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	1984b4195fffa44d
-12	1426	7592360053020579	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	d53ce473f02265a7
-22	1427	7592360053000573	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	515f9627817510bf
-0	1593	7592360054737342	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	31566117eeb4db49
-36	1448	7592360053225013	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	8d137422eacafd5d
-28	1735	7592360056158852	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	2886caf04e5e7540
-1857	1938	7592360058269779	C:/Users/Pierre/Desktop/Projets Unity/Flappy Doom/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6s3i6y25/obj/arm64-v8a/libgame.so	b482419f7524cf14
-53	250	7592364003180423	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	c517fa5a0475667
-251	380	7592364004544519	C:/Users/Pierre/Desktop/Projets Unity/Flappy Doom/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6s3i6y25/obj/arm64-v8a/libswappywrapper.so	85ac5b45b7029dd9
-5	1117	7592364011718900	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	515f9627817510bf
-37	1163	7592364012248844	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	69f27e39a645c39c
-11	1181	7592364012449130	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	d53ce473f02265a7
-26	1210	7592364012729187	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	8d137422eacafd5d
-46	1323	7592364013833794	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	1984b4195fffa44d
-21	1357	7592364014213878	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	31566117eeb4db49
-31	1568	7592364016268308	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	2886caf04e5e7540
-16	1777	7592364018352660	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	b1a2d12295e6c96e
-1778	1891	7592364019642756	C:/Users/Pierre/Desktop/Projets Unity/Flappy Doom/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6s3i6y25/obj/arm64-v8a/libgame.so	b482419f7524cf14
+48	492	7593293568130335	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	c517fa5a0475667
+494	721	7593293570449344	C:/Users/Pierre/Desktop/Projets Unity/Flappy Doom/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6s3i6y25/obj/arm64-v8a/libswappywrapper.so	85ac5b45b7029dd9
+19	1543	7593293578595834	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	69f27e39a645c39c
+13	1592	7593293579103806	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	d53ce473f02265a7
+44	1617	7593293579338926	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	8d137422eacafd5d
+31	1650	7593293579662806	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	515f9627817510bf
+38	1723	7593293580101616	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	1984b4195fffa44d
+0	1894	7593293581936742	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	31566117eeb4db49
+24	1909	7593293582226109	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	2886caf04e5e7540
+6	2056	7593293583575741	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	b1a2d12295e6c96e
+2056	2241	7593293585434276	C:/Users/Pierre/Desktop/Projets Unity/Flappy Doom/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6s3i6y25/obj/arm64-v8a/libgame.so	b482419f7524cf14
