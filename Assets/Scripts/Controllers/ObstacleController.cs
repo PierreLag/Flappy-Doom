@@ -21,7 +21,7 @@ namespace FlappyDoom
         [SerializeField]
         private float movementDuration;
 
-        // Start is called before the first frame update
+        // If this obstacle is not static, moves it on the X axis towards its destination. On game end, stops its movement, on new game start destroys the object.
         void Start()
         {
             if (!isStatic)
@@ -32,12 +32,14 @@ namespace FlappyDoom
             }
         }
 
+        // If the player hits this obstacle's Trigger collision, invokes the action attached on the Editor.
         private void OnTriggerEnter(Collider collision)
         {
             if (collision.TryGetComponent<PlayerController>(out PlayerController controller))
                 OnTriggerEnterCustom.Invoke();
         }
 
+        // If the player hits this obstacle's physics collision, invokes the action attached on the Editor.
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.collider.TryGetComponent<PlayerController>(out PlayerController controller))

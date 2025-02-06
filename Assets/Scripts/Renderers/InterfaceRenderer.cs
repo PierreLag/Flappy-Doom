@@ -35,7 +35,8 @@ namespace FlappyDoom
         private bool isMonthOnly = false;
         private bool isAscending = false;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        // Assigns the display of the leaderboard on game end, and its reinitialisation once a new game starts.
+        // If it's the first time booting the game, asks for the player's username to store it on both the database and locally.
         void Start()
         {
             GameManager.s_this.OnEnd.AddListener(delegate { DisplayLeaderboard(); });
@@ -47,11 +48,25 @@ namespace FlappyDoom
             }
         }
 
+        /// <summary>
+        /// Updates the score displayed on the top right of the screen to show the player's score in the current game.
+        /// </summary>
         public void UpdateDisplayedScore()
         {
             scoreDisplay.text = "Score : " + GameManager.GetPoints();
         }
 
+        /// <summary>
+        /// Displays the leaderboard. If it wasn't shown before this call, waits for a second for the animation and SFX to play.
+        /// <para></para>
+        /// Its displayed values depend on the values of isLocal, isAscending and isMonthOnly.
+        /// <para></para>
+        /// isLocal : whether it shows the scores stored on the device's local NoSQL database or the ones stored on the distant SQL database.
+        /// <br/>
+        /// isAscending : shows the scores in either ascending or descending order.
+        /// <br/>
+        /// isMonthOnly : if on, it will only show the scores for this month. Otherwise, show all scores.
+        /// </summary>
         private async void DisplayLeaderboard()
         {
             if (!leaderboardPanel.IsActive())
@@ -101,10 +116,17 @@ namespace FlappyDoom
                     newDisplayScore.transform.DOLocalMoveY(-((RectTransform)newDisplayScore.transform).sizeDelta.y * (i * 2 + 1) / 2, 0f);
                 }
             }
-
+            // We adapt the content size of the Leaderboard ScrollRect in order to allow the smooth and responsive scrolling through the data.
             ((RectTransform)leaderboardView.content).sizeDelta = new Vector2(0, ((RectTransform)scoreTemplate.transform).sizeDelta.y * leaderboardView.content.transform.childCount);
         }
 
+        /// <summary>
+        /// Takes the template stored in scoreTemplate and applies the attributes score's value, who scored it, and when.
+        /// </summary>
+        /// <param name="name">The name of the player who made the score (the default for locally stored scores is "You").</param>
+        /// <param name="date">The date at which the score was made.</param>
+        /// <param name="score">The value of the score.</param>
+        /// <returns>The instantiated GameObject of the template with its value attributed.</returns>
         public GameObject InstantiateDisplayScore(string name, DateTime date, int score)
         {
             GameObject displayScore = Instantiate(scoreTemplate, leaderboardView.content);
@@ -116,6 +138,9 @@ namespace FlappyDoom
             return displayScore;
         }
 
+        /// <summary>
+        /// Destroys the leaderboard ScrollRect's content's children.
+        /// </summary>
         private void ClearLeaderboardView()
         {
             Transform[] previousChildren = leaderboardView.content.GetComponentsInChildren<Transform>();
@@ -126,13 +151,17 @@ namespace FlappyDoom
             }
         }
 
+        /// <summary>
+        /// Takes the name inserted into the input field usernameInput, and passes it onto the OnlineController to be sent to the database.
+        /// Fails if a user with the same name already exists.
+        /// </summary>
         public async void SubmitUsername()
         {
             onlineController.SaveUsername(usernameInput.text);
 
             object response = null;
             int timesWaiting = 0;
-            while (response == null && timesWaiting <= 9)
+            while (response == null && timesWaiting <= 15)
             {
                 await Task.Delay(100);
                 response = onlineController.GetResponse();
@@ -156,6 +185,9 @@ namespace FlappyDoom
             }
         }
 
+        /// <summary>
+        /// Swaps between the local and the distant leaderboard database.
+        /// </summary>
         public void SwapLeaderboardArea()
         {
             if (isLocal)
@@ -172,6 +204,10 @@ namespace FlappyDoom
             }
         }
 
+        /// <summary>
+        /// Changes the value of the isMonthOnly bool, affecting which values to display on the leaderboard.
+        /// </summary>
+        /// <param name="isTrue">True if only scores of this month should be shown, false otherwise.</param>
         public void ShowOnlyCurrentMonth(bool isTrue)
         {
             ClearLeaderboardView();
@@ -179,6 +215,9 @@ namespace FlappyDoom
             DisplayLeaderboard();
         }
 
+        /// <summary>
+        /// Toggles the display order of the scores on the leaderboard.
+        /// </summary>
         public void SwapLeaderboardOrder()
         {
             ClearLeaderboardView();

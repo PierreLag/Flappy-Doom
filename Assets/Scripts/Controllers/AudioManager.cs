@@ -27,22 +27,32 @@ namespace FlappyDoom
             }
         }
 
+        // We start the music when the game starts, and stop it once the game is over.
         private void Start()
         {
             GameManager.s_this.OnEnd.AddListener(delegate { StopMusic(); });
             GameManager.s_this.OnStart.AddListener(delegate { PlayMusic(); });
         }
 
+        /// <summary>
+        /// Plays the music attached to the referenced Music Player's AudioSource.
+        /// </summary>
         public void PlayMusic()
         {
             musicPlayer.Play();
         }
 
+        /// <summary>
+        /// Stops the music attached to the referenced Music Player's AudioSource.
+        /// </summary>
         public void StopMusic()
         {
             musicPlayer.Stop();
         }
 
+        /// <summary>
+        /// Plays the sound effect attached to the referenced Sound Player's AudioSource.
+        /// </summary>
         public static void PlayScoreUp()
         {
             instance.scoreUpPlayer.Play();

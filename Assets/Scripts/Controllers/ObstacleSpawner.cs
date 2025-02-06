@@ -32,23 +32,33 @@ namespace FlappyDoom
             }
         }
 
+        // Starts the spawning of obstacles on game start, stops it on game end.
         private void Start()
         {
             GameManager.s_this.OnStart.AddListener(delegate { StartSpawning(); });
             GameManager.s_this.OnEnd.AddListener(delegate { CancelInvoke("SpawnObstacle"); });
         }
 
-        // Start is called before the first frame update
+        /// <summary>
+        /// Starts spawning obstacles with a frequency determined by spawnInterval.
+        /// </summary>
         private void StartSpawning()
         {
             InvokeRepeating("SpawnObstacle", 1f, spawnInterval);
         }
 
+        /// <summary>
+        /// Returns the transform of the obstacles' destination.
+        /// </summary>
+        /// <returns>A Transform with the position of the obstacles' destination.</returns>
         public static Transform GetDestination()
         {
             return s_this.destination;
         }
 
+        /// <summary>
+        /// Instantiates a new obstacle, with a Y coordinate ranging from this spawner's lowestRandomPosition to its highestRandomPosition.
+        /// </summary>
         private void SpawnObstacle()
         {
             Instantiate(obstaclePrefab, new Vector3(transform.position.x, Random.Range(lowestRandomPosition, highestRandomPosition), transform.position.z), obstaclePrefab.transform.rotation, transform);

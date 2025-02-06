@@ -19,6 +19,8 @@ namespace FlappyDoom
         public UnityEvent OnStart { get { return onStart; } set { onStart = value; } }
         private UnityEvent onEnd = new();
         public UnityEvent OnEnd { get { return onEnd; } set { onEnd = value; } }
+        private UnityEvent onConnectionFailed = new();
+        public UnityEvent OnConnectionFailed { get { return onConnectionFailed; } set { OnConnectionFailed = value; } }
 
         [SerializeField]
         private InterfaceRenderer interfaceRenderer;

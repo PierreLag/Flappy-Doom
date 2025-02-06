@@ -1028,6 +1028,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2105320939}
     m_Modifications:
+    - target: {fileID: -1516379865181364410, guid: fe0349b52856e9a40855feca5bae6e94, type: 3}
+      propertyPath: filePathName
+      value: Leaderboard.strat
+      objectReference: {fileID: 0}
     - target: {fileID: 7722826913944905444, guid: fe0349b52856e9a40855feca5bae6e94, type: 3}
       propertyPath: m_Name
       value: LeaderboardController
@@ -1744,6 +1748,7 @@ MonoBehaviour:
   apiUploadUsername: AddUser.php
   apiUploadScore: UploadScore.php
   apiDownloadScores: GetAllScores.php
+  apiTestConnection: TestConnection.php
 --- !u!4 &2137193655
 Transform:
   m_ObjectHideFlags: 0

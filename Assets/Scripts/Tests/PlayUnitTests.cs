@@ -11,10 +11,12 @@ using FlappyDoom;
 
 public class PlayUnitTests
 {
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
+    /// <summary>
+    /// Tests if the game starts properly and invokes the events correctly.
+    /// </summary>
+    /// <returns></returns>
     [UnityTest]
-    public IEnumerator isGameStarting()
+    public IEnumerator IsGameStarting()
     {
         SceneManager.LoadScene(0);
         yield return null;
@@ -28,8 +30,12 @@ public class PlayUnitTests
         Assert.IsTrue(GameManager.s_this.IsPlaying);
     }
 
+    /// <summary>
+    /// Tests if the character jumps correctly once the game has started.
+    /// </summary>
+    /// <returns></returns>
     [UnityTest]
-    public IEnumerator isCharacterJumping()
+    public IEnumerator IsCharacterJumping()
     {
         SceneManager.LoadScene(0);
         yield return null;
@@ -48,8 +54,12 @@ public class PlayUnitTests
         Assert.IsTrue(player.GetComponent<Rigidbody>().linearVelocity.magnitude > 1);
     }
 
+    /// <summary>
+    /// Tests that the leaderboard displays correctly once the game has ended.
+    /// </summary>
+    /// <returns></returns>
     [UnityTest]
-    public IEnumerator isLeaderboardDisplaying()
+    public IEnumerator IsLeaderboardDisplaying()
     {
         PlayerPrefs.SetString("username", "test");
         SceneManager.LoadScene(0);
@@ -68,8 +78,12 @@ public class PlayUnitTests
         Assert.IsTrue(leaderboardPanel.activeSelf);
     }
 
+    /// <summary>
+    /// Tests if the ability to read a file works correctly in script.
+    /// </summary>
+    /// <returns></returns>
     [UnityTest]
-    public IEnumerator isReadingFile()
+    public IEnumerator IsReadingFile()
     {
         SceneManager.LoadScene(0);
         yield return null;

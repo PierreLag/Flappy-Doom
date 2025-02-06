@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FlappyDoom
 {
@@ -12,6 +13,8 @@ namespace FlappyDoom
 
         [SerializeField]
         private string filePathName = "Leaderboard.json";
+
+        Encryptor encryptor;
 
         [STAThread]
         private void Awake()
@@ -34,9 +37,30 @@ namespace FlappyDoom
             }
         }
 
-        private void Start()
+        private async void Start()
         {
             GameManager.s_this.OnEnd.AddListener(delegate { AddNewScore(GameManager.GetPoints()); });
+
+            OnlineController onlineController = FindFirstObjectByType<OnlineController>();
+
+            object response = null;
+            int timesWaiting = 0;
+            while (response == null && timesWaiting <= 5)
+            {
+                await Task.Delay(100);
+                response = onlineController.GetResponse();
+                timesWaiting++;
+            }
+
+            if (response == null || (string)response == "Error : Couldn't connect" || (string)response == "ERREUR DE CONNEXION")
+            {
+                GameManager.s_this.OnConnectionFailed.Invoke();
+            }
+            else
+            {
+                encryptor = new Encryptor(response.ToString());
+                onlineController.ResetResponse();
+            }
         }
 
         [STAThread]
@@ -45,7 +69,7 @@ namespace FlappyDoom
             try
             {
                 StreamWriter sw = new StreamWriter(Application.persistentDataPath + Path.DirectorySeparatorChar + filePathName, false);
-                sw.Write(localLeaderboard.ToJSON());
+                sw.Write(encryptor.Encrypt(localLeaderboard.ToJSON()));
 
                 sw.Close();
             }
@@ -62,7 +86,7 @@ namespace FlappyDoom
             try
             {
                 StreamReader sr = new StreamReader(Application.persistentDataPath + Path.DirectorySeparatorChar + filePathName);
-                string jsonScore = sr.ReadToEnd();
+                string jsonScore = encryptor.Decrypt(sr.ReadToEnd());
 
                 sr.Close();
 
